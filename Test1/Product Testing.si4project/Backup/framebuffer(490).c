@@ -8,7 +8,7 @@
 #include <string.h>
 #include <sys/ioctl.h>
 /* My include */
-#include <disp_manager.h>
+#include "disp_manager.h"
 
 static int fd_fb;
 static struct fb_var_screeninfo var;	/* Current var */
