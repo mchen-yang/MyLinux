@@ -1,14 +1,10 @@
 #ifndef _DISP_MANAGER_H_
 #define _DISP_MANAGER_H_
 
-#ifndef NULL
-#define NULL (void *)0
-#endif
-
 typedef struct DispBuff {
-	int pX;
-	int pY;
-	int pB;
+	int* pX;
+	int* pY;
+	int* pB;
 	char* buff;
 }DispBuff, *PDispBuff;
 
@@ -21,10 +17,10 @@ typedef struct Region {
 
 typedef struct DispOper {
 	char* name;
-	int (*DeviceInit)(void);
-	int (*DeviceExit)(void);
-	int (*GetBuffer)(PDispBuff ptDispBuff);
-	int (*FlushRegion)(PRegion ptRegion, PDispBuff buffer);
+	int DeviceInit(void);
+	int DeviceExit(void);
+	int GetBuffer(PDispBuff ptDispBuff);
+	int FlushRegion(PRegion ptRegion, PDispBuff buffer);
 	struct DispOper* ptNext;
 }DispOper, *PDispOper;
 
@@ -32,8 +28,6 @@ int PutPixel(int x, int y, unsigned int bp);
 void RegisterDisplay(PDispOper ptDispoper);
 void DisplayInit(void);
 int SelectDefaultDisplay(char* name);
-int FlushDefaultDisplay(PRegion ptRegion, PDispBuff buffer);
+int FlushDefaultDisplay(void)(PRegion ptRegion, PDispBuff buffer);
 int InitDefaultDisplay(void);
-PDispBuff GetDispBuff(void);
-
 #endif // !_DISP_MANAGER_H_

@@ -4661,25 +4661,11 @@ void lcd_put_ascii(int x, int y, unsigned char c)
 
 int main(int argc, char **argv)
 {
-	Region region;
-	PDispBuff ptbuffer;
-
 	DisplayInit();
 
-	SelectDefaultDisplay("fb");
+	SelectDefaultDisplay();
 
-	InitDefaultDisplay();
-
-	lcd_put_ascii(100, 100, 'A');
-
-	region.LeftUpX = 100;
-	region.LeftUpY = 100;
-	region.Width = 8;
-	region.Heigh = 16;
-
-	ptbuffer = GetDispBuff();
-	FlushDefaultDisplay(&region, ptbuffer);
-
-	return 0;
+	
+	
 }
 

@@ -8,7 +8,7 @@
 #include <string.h>
 #include <sys/ioctl.h>
 /* My include */
-#include <disp_manager.h>
+#include "disp_manager.h"
 
 static int fd_fb;
 static struct fb_var_screeninfo var;	/* Current var */
@@ -45,7 +45,7 @@ static int FbDeviceInit(void) {
 }
 
 static int FbDeviceExit(void) {
-	munmap(fb_base, screen_size);
+	munmap(fd_fb, screen_size);
 	close(fd_fb);
 	return 0;
 }
@@ -57,7 +57,7 @@ static int FbGetBuffer(PDispBuff ptDispBuff) {
 	ptDispBuff->pX = var.xres;
 	ptDispBuff->pY = var.yres;
 	ptDispBuff->pB = var.bits_per_pixel;
-	ptDispBuff->buff = (char*)fb_base;
+	ptDispBuff->buff = fb_base;
 
 	return 0;
 }
