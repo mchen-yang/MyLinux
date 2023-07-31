@@ -17,18 +17,18 @@ export STRIP OBJCOPY OBJDUMP
 CFLAGS := -Wall -O2 -g
 CFLAGS += -I $(shell pwd)/include
 
-LDFLAGS := 
+LDFLAGS := -lts
 
 export CFLAGS LDFLAGS
 
 TOPDIR := $(shell pwd)
 export TOPDIR
 
-TARGET := test_frame
+TARGET := test_input2
 
 
-obj-y += display/
-obj-y += unitest/
+obj-y += input/
+#obj-y += unitest/
 
 
 all : start_recursive_build $(TARGET)
