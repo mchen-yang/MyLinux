@@ -10,6 +10,8 @@
 #define INPUT_TYPE_TOUCH 1
 #define INPUT_TYPE_NET   2
 
+
+
 typedef struct InputData{
 	struct timeval tTime; 
 	int InputType;
@@ -26,6 +28,14 @@ typedef struct InputOper{
 	int (*GetInput)(PInputData ptInputData);
 	struct InputOper* pNext;
 }InputOper, *PInputOper;
+
+void RegisterInput(PInputOper ptInputOper);
+void InputInit(void);
+int SelectDefaultInput(char* name);
+int InitInputDevice(void); 
+int GetInputData(PInputData ptData);
+
+
 
 #endif
 

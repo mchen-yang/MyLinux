@@ -81,10 +81,10 @@ static InputOper g_tNetScreenOper = {
 	.GetInput		= NetGetInput,
 };
 
-void NetScreenInit() {
-	//RegisterInput(&g_tFramebufferOper);
+void NetScreenInit(void) {
+	RegisterInput(&g_tNetScreenOper);
 }
-#if 1
+#if 0
 
 int main(int argc, char **argv){
 	InputData tInputData;
