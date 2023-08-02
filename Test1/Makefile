@@ -17,19 +17,23 @@ export STRIP OBJCOPY OBJDUMP
 CFLAGS := -Wall -O2 -g
 CFLAGS += -I $(shell pwd)/include
 
-LDFLAGS := -lts -lpthread
+LDFLAGS := -lts -lpthread -lfreetype -lm
 
 export CFLAGS LDFLAGS
 
 TOPDIR := $(shell pwd)
 export TOPDIR
 
-TARGET := test_input3
+TARGET := test_zonghe
 
 
+obj-y += display/
+obj-y += font/
 obj-y += input/
-obj-y += unitest/
-
+obj-y += ui/
+obj-y += page/
+obj-y += config/
+obj-y += business/
 
 all : start_recursive_build $(TARGET)
 	@echo $(TARGET) has been built!
