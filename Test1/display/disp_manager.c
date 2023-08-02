@@ -101,5 +101,83 @@ PDispBuff GetDispBuff(void){
 	return &g_tDispBuff;
 }
 
+void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor){
+	int n = strlen(name);
+	int iFontSize = ptRegion->Width / n / 2;
+	FontBitMap tFontBitMap;
 
+	int i=0;
+	int iOriginX, iOriginY;
+	
+	if (iFontSize > ptRegion->Heigh)
+		iFontSize =  ptRegion->Heigh;
+
+	iOriginX = (ptRegion->Width - n * iFontSize)/2 + ptRegion->LeftUpX;
+	iOriginY = (ptRegion->Heigh - iFontSize)/2 + iFontSize + ptRegion->LeftUpY;
+
+	SetFontSize(iFontSize);
+
+	while (name[i])
+	{
+		/* get bitmap */
+		tFontBitMap.iCurOriginX = iOriginX;
+		tFontBitMap.iCurOriginY = iOriginY;
+		int error = GetFontBitMap(name[i], &tFontBitMap);
+		if (error)
+		{
+			printf("DrawTextInRegionCentral err\n");
+			return;
+		}
+
+		/* draw on buffer */
+		DrawFontBitMap(&tFontBitMap, dwColor);
+
+		iOriginX = tFontBitMap.iNextOriginX;
+		iOriginY = tFontBitMap.iNextOriginY;	
+		i++;
+
+	}
+}
+
+void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor)
+{
+  int i, j, p, q;
+	int x = ptFontBitMap->tRegion.LeftUpX;
+	int y = ptFontBitMap->tRegion.LeftUpY;
+  int x_max = x + ptFontBitMap->tRegion.Width;
+  int y_max = y + ptFontBitMap->tRegion.Heigh;
+	int width = ptFontBitMap->tRegion.Width;
+	unsigned char *buffer = ptFontBitMap->pucBuffer;
+
+    //printf("x = %d, y = %d\n", x, y);
+
+    for ( j = y, q = 0; j < y_max; j++, q++ )
+    {
+        for ( i = x, p = 0; i < x_max; i++, p++ )
+        {
+            if ( i < 0      || j < 0       ||
+                i >= g_tDispBuff.pX || j >= g_tDispBuff.pY )
+            continue;
+
+            //image[j][i] |= bitmap->buffer[q * bitmap->width + p];
+            if (buffer[q * width + p])
+	            PutPixel(i, j, dwColor);
+        }
+    }
+	
+}
+void DrawRegion(PRegion ptRegion, unsigned int dwColor){
+	int x = ptRegion->LeftUpX;
+	int y = ptRegion->LeftUpY;
+	int width = ptRegion->Width;
+	int heigh = ptRegion->Heigh;
+	int j,i;
+	for (j = y; j < y + heigh; j++)
+	{
+		for (i = x; i < x + width; i++)
+			PutPixel(i, j, dwColor);
+	}
+
+	
+}
 
