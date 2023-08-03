@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	DisplayInit();
+	DisplaySystemRegister();
 
 	SelectDefaultDisplay("fb");
 
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 
 	ptBuffer = GetDispBuff();
 	
-	FontInit();
+	FontSystemRegister();
 	
 	error = SelectAndInitFont("freetype", argv[1]);
 	if (error)

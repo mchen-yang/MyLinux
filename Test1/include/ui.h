@@ -19,6 +19,7 @@ typedef int (*ONPRESSED_FUNC)(struct Button *ptButton, PDispBuff ptDispBuff, PIn
 
 typedef struct Button {
 	char* name;
+	int FontSize;
 	int status;
 	Region tRegion;
 	ONDRAW_FUNC OnDraw;

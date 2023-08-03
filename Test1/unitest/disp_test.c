@@ -4664,7 +4664,7 @@ int main(int argc, char **argv)
 	Region region;
 	PDispBuff ptbuffer;
 
-	DisplayInit();
+	DisplaySystemRegister();
 
 	SelectDefaultDisplay("fb");
 

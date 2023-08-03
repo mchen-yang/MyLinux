@@ -26,7 +26,7 @@ void DrawRegion(PRegion ptRegion, unsigned int dwColor);
 
 int PutPixel(int x, int y, unsigned int bp);
 void RegisterDisplay(PDispOper ptDispoper);
-void DisplayInit(void);
+void DisplaySystemRegister(void);
 int SelectDefaultDisplay(char* name);
 int FlushDefaultDisplay(PRegion ptRegion, PDispBuff buffer);
 int InitDefaultDisplay(void);

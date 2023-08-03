@@ -30,7 +30,7 @@ typedef struct InputOper{
 }InputOper, *PInputOper;
 
 void RegisterInput(PInputOper ptInputOper);
-void InputInit(void);
+void InputSystemRegister(void);
 int SelectDefaultInput(char* name);
 int InitInputDevice(void); 
 int GetInputData(PInputData ptData);

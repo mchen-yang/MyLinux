@@ -9,10 +9,10 @@ void FontsRegister(PFontOpr ptFontOper) {
 	g_ptFonts = ptFontOper;
 }
 
-void FontInit(void) {
+void FontSystemRegister(void) {
 	/* register FreeType */
-	extern void FreeTypeInit();
-	FreeTypeInit();
+	extern void FreeTypeRegister();
+	FreeTypeRegister();
 
 }
 
@@ -41,6 +41,10 @@ int SetFontSize(int iFontSize)
 int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap)
 {
 	return g_ptDefaulFontOpr->GetFontBitMap(dwCode, ptFontBitMap);
+}
+int GetStringRegionCar(char *str, PRegionCartesian ptRegionCar)
+{
+	return g_ptDefaulFontOpr->GetStringRegionCar(str, ptRegionCar);
 }
 
 //int InitInputDevice(void) {

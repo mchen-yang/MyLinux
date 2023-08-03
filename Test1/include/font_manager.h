@@ -19,13 +19,14 @@ typedef struct FontOpr{
 	int (*FontInit)(char *aFineName);//TODO: which font file
 	int (*SetFontSize)(int iFontSize);
 	int (*GetFontBitMap)(unsigned int dwCode, PFontBitMap ptFontBitMap);//TODO:ascii AND BITMAP
+	int (*GetStringRegionCar)(char *str, PRegionCartesian ptRegionCar);
 
 	struct FontOpr* ptNext;
 }FontOpr, *PFontOpr;
 
 void FontsRegister(PFontOpr ptFontOper);
 
-void FontInit(void);
+void FontSystemRegister(void);
 
 int SelectAndInitFont(char *aFontOprName, char *aFontFileName);
 
@@ -33,6 +34,7 @@ int SetFontSize(int iFontSize);
 
 int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap);
 
+int GetStringRegionCar(char *str, PRegionCartesian ptRegionCar);
 
 #endif
 

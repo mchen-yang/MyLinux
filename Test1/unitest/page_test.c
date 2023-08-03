@@ -13,7 +13,7 @@
 
 int main(int argc, char **argv)
 {
-	PagesRegister();
+	PageSystemRegister();
 	Page("main")->Run(NULL);
 	return 0;	
 }

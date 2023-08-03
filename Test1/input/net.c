@@ -81,7 +81,7 @@ static InputOper g_tNetScreenOper = {
 	.GetInput		= NetGetInput,
 };
 
-void NetScreenInit(void) {
+void NetInputRegister(void) {
 	RegisterInput(&g_tNetScreenOper);
 }
 #if 0

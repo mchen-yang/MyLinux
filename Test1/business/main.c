@@ -28,20 +28,20 @@ int main(int argc, char **argv)
 		return -1;
 	}
 	/* init display */
-	DisplayInit();
+	DisplaySystemRegister(); /* before: DisplayInit(); */
 
 	SelectDefaultDisplay("fb");
 
 	InitDefaultDisplay();
 
 	/* init input */
-	InputInit();
+	InputSystemRegister();/* before: InputInit(); */
 
 	InitInputDevice();
 
 	/* init font */
 	
-	FontInit();
+	FontSystemRegister();/* before: FontInit(); */
 
 	error = SelectAndInitFont("freetype", argv[1]);
 	if (error)
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 	/* init page */
-	PagesRegister();
+	PageSystemRegister();/* before: PagesRegister(); */
 
 		/* run main_page */
 	Page("main")->Run(NULL);

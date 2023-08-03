@@ -5,6 +5,7 @@
 #include <ui.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>
 
 #define X_GAP 5
@@ -19,6 +20,10 @@ static int MainPageOnPressed(struct Button *ptButton,  PDispBuff ptDispBuff, PIn
 	char name[100];
 	char status[100];
 	char *strButton;
+	char *command_status[3] = {"err", "ok", "percent"};
+	int command_status_index = 0;
+	char command[1000];
+	PItemCfg ptItemCfg;
 
 	strButton = ptButton->name;
 	/* Touch: */
@@ -31,7 +36,11 @@ static int MainPageOnPressed(struct Button *ptButton,  PDispBuff ptDispBuff, PIn
 		/* Touch handle */
 		ptButton->status = !ptButton->status;
 		if (ptButton->status)
+		{
+			command_status_index = 1;
 			dwColor = BUTTON_PRESSED_COLOR;
+		}
+			
 	}
 	/* Net: */
 	else if(ptInputData->InputType == INPUT_TYPE_NET ){
@@ -41,12 +50,15 @@ static int MainPageOnPressed(struct Button *ptButton,  PDispBuff ptDispBuff, PIn
 		sscanf(ptInputData->InputStr, "%s %s", name, status);
 
 		if(strcmp(status, "ok") == 0){
+			command_status_index = 1;
 			dwColor = BUTTON_PRESSED_COLOR;
 		}
 		else if(strcmp(status, "err") == 0){
+			command_status_index = 0;
 			dwColor = BUTTON_DEFAULT_COLOR;
 		}
 		else if(status[0] >= '0' && status[0] <= '9'){//TODO
+			command_status_index = 2;
 			dwColor = BUTTON_PERCENT_COLOR;
 			strButton = status;		
 		}
@@ -65,8 +77,47 @@ static int MainPageOnPressed(struct Button *ptButton,  PDispBuff ptDispBuff, PIn
 
 	/* flush to lcd/web */
 	FlushDefaultDisplay(&ptButton->tRegion, ptDispBuff);
+	/* 执行command */
+	ptItemCfg = GetItemCfgByName(ptButton->name);
+	if (ptItemCfg->command[0] != '\0')
+	{
+		sprintf(command, "%s %s", ptItemCfg->command, command_status[command_status_index]);
+		system(command);
+	}
 
 	return 0;
+}
+
+static int GetFontSizeForAllButton(void){
+	int i;
+	int maxlen = -1;
+	int len;
+	int maxIndex = 0;
+	RegionCartesian tRegionCar;
+	float k, kx, ky;
+		
+	/* find string with maxlen */
+	for(i = 0; i < g_tButtonCnt; i++)
+	{
+		len = strlen(g_tButtons[i].name);
+		if(len > maxlen){
+			maxlen = len;
+			maxIndex = i;
+
+		}
+	}
+	/* get bound of maxlen_string  */
+	SetFontSize(100);
+	GetStringRegionCar(g_tButtons[maxIndex].name, &tRegionCar);
+	/* resize the bound to button */
+	kx = (float)g_tButtons[maxIndex].tRegion.Width / tRegionCar.Width;
+	ky = (float)g_tButtons[maxIndex].tRegion.Heigh/ tRegionCar.Heigh;
+	k = kx < ky ? kx : ky;
+
+	/* get the size of the string
+	*	反算出font size, 只取0.80, 避免文字过于接近边界
+	*/
+	return k * 100 * 0.8;
 }
 
 static void GenerateButton(void){
@@ -80,6 +131,7 @@ static void GenerateButton(void){
 	int start_x, start_y;
 	int pre_start_x, pre_start_y;
 	PButton pButton;
+	int FontSize;
 	int i = 0;
 	
 	/* caculate width and height */
@@ -121,10 +173,15 @@ static void GenerateButton(void){
 			i++;
 		}
 	}
+	FontSize = GetFontSizeForAllButton();
 
 	/* OnDraw */
-		for (i = 0; i < n; i++)
-		g_tButtons[i].OnDraw(&g_tButtons[i], pDispBuff);
+		for (i = 0; i < n; i++){
+			g_tButtons[i].FontSize = FontSize;
+			g_tButtons[i].OnDraw(&g_tButtons[i], pDispBuff);
+
+		}
+		
 }
 
 static int isTouchPointInRegion(int iX, int iY, PRegion ptRegion)

@@ -74,6 +74,6 @@ static DispOper g_tFramebufferOper = {
 	.FlushRegion	= FbFlushRegion,
 };
 
-void FramebufferInit() {
+void FramebufferRegister() {
 	RegisterDisplay(&g_tFramebufferOper);
 }

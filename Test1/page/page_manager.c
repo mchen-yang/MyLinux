@@ -26,7 +26,7 @@ PPageAction Page(char *name)
 	return NULL;
 }
 
-void PagesRegister(void)
+void PageSystemRegister(void)
 {
 	extern void MainPageRegister(void);
 	MainPageRegister();

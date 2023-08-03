@@ -57,10 +57,10 @@ void RegisterDisplay(PDispOper ptDispOper) {
 	g_DispDevs = ptDispOper;
 }
 
-void DisplayInit(void) {
-	void FramebufferInit();
+void DisplaySystemRegister(void) {
+	void FramebufferRegister();
 
-	FramebufferInit();
+	FramebufferRegister();
 	//web
 }
 
@@ -102,27 +102,36 @@ PDispBuff GetDispBuff(void){
 }
 
 void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor){
-	int n = strlen(name);
-	int iFontSize = ptRegion->Width / n / 2;
+//	int n = strlen(name);
+//	int iFontSize = ptRegion->Width / n / 2;
 	FontBitMap tFontBitMap;
+	RegionCartesian tRegionCar;
 
 	int i=0;
 	int iOriginX, iOriginY;
+	int error;
+		/* 计算字符串的外框 */
+	GetStringRegionCar(name, &tRegionCar);
 	
-	if (iFontSize > ptRegion->Heigh)
-		iFontSize =  ptRegion->Heigh;
+	/* 算出第一个字符的origin */
+	iOriginX = ptRegion->LeftUpX + (ptRegion->Width - tRegionCar.Width)/2 - tRegionCar.LeftUpX;
+	iOriginY = ptRegion->LeftUpY + (ptRegion->Heigh - tRegionCar.Heigh)/2 + tRegionCar.LeftUpY;
 
-	iOriginX = (ptRegion->Width - n * iFontSize)/2 + ptRegion->LeftUpX;
-	iOriginY = (ptRegion->Heigh - iFontSize)/2 + iFontSize + ptRegion->LeftUpY;
 
-	SetFontSize(iFontSize);
+//	if (iFontSize > ptRegion->Heigh)
+//		iFontSize =  ptRegion->Heigh;
+//
+//	iOriginX = (ptRegion->Width - n * iFontSize)/2 + ptRegion->LeftUpX;
+//	iOriginY = (ptRegion->Heigh - iFontSize)/2 + iFontSize + ptRegion->LeftUpY;
+
+//	SetFontSize(iFontSize);//TODO:why
 
 	while (name[i])
 	{
 		/* get bitmap */
 		tFontBitMap.iCurOriginX = iOriginX;
 		tFontBitMap.iCurOriginY = iOriginY;
-		int error = GetFontBitMap(name[i], &tFontBitMap);
+		error = GetFontBitMap(name[i], &tFontBitMap);
 		if (error)
 		{
 			printf("DrawTextInRegionCentral err\n");

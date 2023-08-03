@@ -63,14 +63,14 @@ void RegisterInput(PInputOper ptInputOper) {
 	g_InputDevs = ptInputOper;
 }
 
-void InputInit(void) {
+void InputSystemRegister(void) {
 	/* register touchscreen */
-	extern void TouchScreenInit();
-	TouchScreenInit();
+	extern void TouchScreenRegister();
+	TouchScreenRegister();
 	
 	 /* register net*/
-	extern void NetScreenInit();
-	NetScreenInit();
+	extern void NetInputRegister();
+	NetInputRegister();
 	//web
 }
 

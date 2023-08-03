@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	int ret;
 	InputData tData;
 
-	InputInit();
+	InputSystemRegister();
 
 	InitInputDevice();
 	printf("start run\n");

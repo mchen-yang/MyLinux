@@ -55,7 +55,7 @@ static InputOper g_tTouchScreenOper = {
 	.GetInput		= TouchGetInput,
 };
 
-void TouchScreenInit(void) {
+void TouchScreenRegister(void) {
 	RegisterInput(&g_tTouchScreenOper);
 }
 
