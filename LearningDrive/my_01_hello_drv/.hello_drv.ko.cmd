@@ -1,0 +1,1 @@
+cmd_/mnt/hgfs/MyLinux/LearningDrive/my_01_hello_drv/hello_drv.ko := arm-buildroot-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /mnt/hgfs/MyLinux/LearningDrive/my_01_hello_drv/hello_drv.ko /mnt/hgfs/MyLinux/LearningDrive/my_01_hello_drv/hello_drv.o /mnt/hgfs/MyLinux/LearningDrive/my_01_hello_drv/hello_drv.mod.o ;  true

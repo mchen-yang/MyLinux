@@ -1,0 +1,3 @@
+/mnt/hgfs/MyLinux/LearningDrive/my_02_led_drv/02_led_drv_for_boards/100ask_imx6ull_src_bin/100ask_led.ko
+/mnt/hgfs/MyLinux/LearningDrive/my_02_led_drv/02_led_drv_for_boards/100ask_imx6ull_src_bin/myled_drv.o /mnt/hgfs/MyLinux/LearningDrive/my_02_led_drv/02_led_drv_for_boards/100ask_imx6ull_src_bin/board_100ask_imx6ull.o
+
