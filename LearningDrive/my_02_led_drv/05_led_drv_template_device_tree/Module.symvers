@@ -1,3 +1,0 @@
-0x8d31bcea	led_class_create_device	/mnt/hgfs/MyLinux/LearningDrive/my_02_led_drv/05_led_drv_template_device_tree/leddrv	EXPORT_SYMBOL
-0x96f821c9	led_class_destroy_device	/mnt/hgfs/MyLinux/LearningDrive/my_02_led_drv/05_led_drv_template_device_tree/leddrv	EXPORT_SYMBOL
-0x5990c3ab	register_led_operations	/mnt/hgfs/MyLinux/LearningDrive/my_02_led_drv/05_led_drv_template_device_tree/leddrv	EXPORT_SYMBOL
