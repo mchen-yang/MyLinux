@@ -1,0 +1,1 @@
+cmd_/mnt/hgfs/MyLinux/LearningDrive/my_04_button/board_xxx.ko := arm-buildroot-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /mnt/hgfs/MyLinux/LearningDrive/my_04_button/board_xxx.ko /mnt/hgfs/MyLinux/LearningDrive/my_04_button/board_xxx.o /mnt/hgfs/MyLinux/LearningDrive/my_04_button/board_xxx.mod.o ;  true
