@@ -1,0 +1,1 @@
+cmd_/mnt/hgfs/MyLinux/LearningDrive/my_06_gpio_irq/02_/gpio_key_drv.ko := arm-buildroot-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /mnt/hgfs/MyLinux/LearningDrive/my_06_gpio_irq/02_/gpio_key_drv.ko /mnt/hgfs/MyLinux/LearningDrive/my_06_gpio_irq/02_/gpio_key_drv.o /mnt/hgfs/MyLinux/LearningDrive/my_06_gpio_irq/02_/gpio_key_drv.mod.o ;  true
